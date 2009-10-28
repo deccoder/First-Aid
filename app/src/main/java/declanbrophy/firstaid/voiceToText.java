@@ -62,7 +62,7 @@ public class voiceToText extends AppCompatActivity {
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(voiceToText.this,LogEntryList.class);
+                Intent intent = new Intent(voiceToText.this,ViewListContents.class);
                 startActivity(intent);
             }
         });
