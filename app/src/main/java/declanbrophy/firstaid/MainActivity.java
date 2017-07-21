@@ -1,8 +1,11 @@
 package declanbrophy.firstaid;
 
+import android.content.Intent;
 import android.media.MediaCodec;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,15 +14,31 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MainActivity extends AppCompatActivity {
+import static declanbrophy.firstaid.R.id.email;
+import static declanbrophy.firstaid.R.id.inputEmail;
 
+public class MainActivity extends AppCompatActivity {
+    public static boolean isValidEmail(String str) {
+        boolean isValid = false;
+        if (Build.VERSION.SDK_INT >= 8) {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches();
+        }
+        String expression = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        CharSequence inputStr = str;
+        Pattern pattern = Pattern.compile(expression);
+        Matcher matcher = pattern.matcher(inputStr);
+        if (matcher.matches()) {
+            isValid = true;
+        }
+        return isValid;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         //Initialize and create contents of user interface
-        final EditText email = (EditText) findViewById(R.id.email);
+        final EditText inputEmail = (EditText) findViewById(R.id.inputEmail);
         final EditText password = (EditText) findViewById(R.id.password);
         final Button register = (Button) findViewById(R.id.register);
         Button signIn = (Button) findViewById(R.id.signIn);
@@ -29,33 +48,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Selection statement checking if email is valid
-             if (!registerEmail(email.getText().toString())) {
-                 email.setError("Invalid Email");
-                 email.requestFocus();
+             if (!isValidEmail(inputEmail().getText().toString().trim())) {
+                 inputEmail.setError("Invalid Email ID");
                  //Selection statement checking password is valid
              } else if (registerPassword(password.getText().toString())) {
                  password.setError("Invalid Password");
                  password.requestFocus();
+                 Log.d("here ","Invalid address");
                  //Selection statement stating password and email is valid
              } else {
-                 Toast.makeText(MainActivity.this, "Sign In Successful", Toast.LENGTH_LONG).show();
+                 Intent intent = new Intent();
+                 intent.setClass(v.getContext(),videoSearch.class);
+                 startActivity(intent);
              }
             }
         });
     }
     //Method of validation of password to check it has uppercase, numbers and symbols included.
     private boolean registerPassword(final String password) {
-        final String passwordPatern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\\\S+$).{4,}$\";\n";
+        final String passwordPatern = "";
         Pattern pattern = Pattern.compile(password);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
     }
-    //Method of validation of email address using pattern to check format.
+    /*Method of validation of email address using pattern to check format.
     private boolean registerEmail(String email) {
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\\\.+[a-z]+";
+        String emailPattern = "";
 
         Pattern pattern = Pattern.compile(emailPattern);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
-    }
+    }*/
 }
