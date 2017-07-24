@@ -14,19 +14,19 @@ import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static declanbrophy.firstaid.R.id.email;
-import static declanbrophy.firstaid.R.id.inputEmail;
+import static android.view.View.Z;
+
 
 public class MainActivity extends AppCompatActivity {
     public static boolean isValidEmail(String str) {
         boolean isValid = false;
-        if (Build.VERSION.SDK_INT >= 8) {
-            return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches();
-        }
+//        if (Build.VERSION.SDK_INT >= 20) {
+//           // return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches();
+//        }
         String expression = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
         CharSequence inputStr = str;
         Pattern pattern = Pattern.compile(expression);
-        Matcher matcher = pattern.matcher(inputStr);
+        Matcher matcher = pattern.matcher(str);
         if (matcher.matches()) {
             isValid = true;
         }
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Selection statement checking if email is valid
-             if (!isValidEmail(inputEmail().getText().toString().trim())) {
+             if (!isValidEmail(inputEmail.getText().toString().trim())) {
                  inputEmail.setError("Invalid Email ID");
                  //Selection statement checking password is valid
              } else if (registerPassword(password.getText().toString())) {
@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
     }
     //Method of validation of password to check it has uppercase, numbers and symbols included.
     private boolean registerPassword(final String password) {
-        final String passwordPatern = "";
-        Pattern pattern = Pattern.compile(password);
+        final String passwordPatern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
+        Pattern pattern = Pattern.compile(passwordPatern);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
     }
