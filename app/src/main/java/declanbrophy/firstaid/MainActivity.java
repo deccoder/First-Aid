@@ -18,9 +18,9 @@ import static android.view.View.Z;
 
 
 public class MainActivity extends AppCompatActivity {
-    public static boolean isValidEmail(String str) {
+    /*public static boolean isValidEmail(String str) {
         boolean isValid = false;
-//        if (Build.VERSION.SDK_INT >= 20) {
+      if (Build.VERSION.SDK_INT >= 20) {
 //           // return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches();
 //        }
         String expression = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
             isValid = true;
         }
         return isValid;
-    }
+
+    }*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,30 +48,38 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Selection statement checking if email is valid
-             if (!isValidEmail(inputEmail.getText().toString().trim())) {
+                //Selection statement that displays message if email format is not valid
+             /*if (!isValidEmail(inputEmail.getText().toString().trim())) {
                  inputEmail.setError("Invalid Email ID");
-                 //Selection statement checking password is valid
+                 //Selection statement that displays messaage if password format is not valid
              } else if (registerPassword(password.getText().toString())) {
                  password.setError("Invalid Password");
                  password.requestFocus();
                  Log.d("here ","Invalid address");
-                 //Selection statement stating password and email is valid
+
              } else {
                  Intent intent = new Intent();
                  intent.setClass(v.getContext(),videoSearch.class);
                  startActivity(intent);
-             }
+             }*/
+                String email = "declanbrophy@gmail.com";
+                String password = "Toby";
+
+                if (email == "declanbrophy@gmail.com") {
+                    inputEmail.getText();
+                } else if (password == "Toby") {
+                    password.
+                }
             }
         });
     }
-    //Method of validation of password to check it has uppercase, numbers and symbols included.
-    private boolean registerPassword(final String password) {
+    //Method of validation of password format to check it has uppercase, numbers and symbols included.
+   /* private boolean registerPassword(final String password) {
         final String passwordPatern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
         Pattern pattern = Pattern.compile(passwordPatern);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();
-    }
+    }*/
     /*Method of validation of email address using pattern to check format.
     private boolean registerEmail(String email) {
         String emailPattern = "";
