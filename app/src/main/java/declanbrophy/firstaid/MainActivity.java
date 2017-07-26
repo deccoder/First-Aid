@@ -62,14 +62,11 @@ public class MainActivity extends AppCompatActivity {
                  intent.setClass(v.getContext(),videoSearch.class);
                  startActivity(intent);
              }*/
-                String email = "declanbrophy@gmail.com";
-                String password = "Toby";
+                Intent intent = new Intent();
+                intent.setClass(v.getContext(),Playlist.class);
+                startActivity(intent);
 
-                if (email == "declanbrophy@gmail.com") {
-                    inputEmail.getText();
-                } else if (password == "Toby") {
-                    password.
-                }
+
             }
         });
     }
